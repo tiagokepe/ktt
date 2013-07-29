@@ -1,17 +1,17 @@
 Job Time {
 	Knobs {
-		int time1 2000 100000
-		int time2 4000 100000
-		int time3 6000 100000
+		int time1 2000 12000
+		int time2 4000 12000
+		int time3 6000 12000
 	}
 	Knobs {
-		int time1 4000 100000
-		int time2 6000 100000
-		int time3 8000 100000
+		int time1 4000 12000
+		int time2 6000 12000
+		int time3 8000 12000
 	}
 	Knobs {
-		int time1 8000 100000
-		int time2 10000 100000
-		int time3 12000 100000
+		int time1 8000 12000
+		int time2 10000 12000
+		int time3 12000 12000
 	}
 }
