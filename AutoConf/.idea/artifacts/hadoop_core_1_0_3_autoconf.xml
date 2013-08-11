@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="hadoop-core-1.0.3-autoconf">
+    <output-path>$PROJECT_DIR$/out/artifacts/hadoop_core_1_0_3_autoconf</output-path>
+    <root id="archive" name="hadoop-core-1.0.3-autoconf.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/out/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

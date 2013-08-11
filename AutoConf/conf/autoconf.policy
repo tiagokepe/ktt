@@ -1,0 +1,3 @@
+grant codeBase "file:/home/kepe/UFPR/mestrado/AutoConf-" {
+    permission java.security.AllPermission;
+};
