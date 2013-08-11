@@ -1,0 +1,9 @@
+export KEPE_HADOOP_HOME=<dir>
+export AUTOCONF_HOME=<dir>
+
+Log do sampling em /tmp/kepe/log/
+
+hadoop fs -put <file> /kepe/wc/input
+hadoop fs -rmr /kepe/wc/out
+
+java -jar jar/tuning-by-testing-1.0.2.jar input/wordCount.job

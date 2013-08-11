@@ -1,0 +1,7 @@
+Job Time {
+	Knobs {
+		int time3 879 13000
+		int time2 4000 13000
+		int time1 880 13000
+	}
+}

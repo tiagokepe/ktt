@@ -1,0 +1,17 @@
+Job Time {
+	Knobs {
+		int time1 2000 13000
+		int time2 4000 13000
+		int time3 6000 13000
+	}
+	Knobs {
+		int time1 4000 13000
+		int time2 6000 13000
+		int time3 8000 13000
+	}
+	Knobs {
+		int time1 8000 13000
+		int time2 10000 13000
+		int time3 12000 13000
+	}
+}
