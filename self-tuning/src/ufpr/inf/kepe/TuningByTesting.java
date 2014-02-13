@@ -2,21 +2,21 @@ package ufpr.inf.kepe;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.StringTokenizer;
 
 import ufpr.inf.kepe.util.AutoConfBash;
-import ufpr.inf.kepe.util.FloatValue;
 import ufpr.inf.kepe.util.HadoopBash;
-import ufpr.inf.kepe.util.IntValue;
-import ufpr.inf.kepe.util.KnobValue;
+import ufpr.inf.kepe.util.Knob;
+import ufpr.inf.kepe.util.KnobBoolean;
+import ufpr.inf.kepe.util.KnobFloat;
+import ufpr.inf.kepe.util.KnobInt;
 
 public class TuningByTesting {
 
@@ -62,20 +62,33 @@ public class TuningByTesting {
 
 	private void readArgs(String[] args)
 	{
-		if(args.length != 2)
+		if(args.length !=2)
 		{
 			System.out.println("Usage:");
 			System.out.println("TuningByTest <file with the initial population>"
 							+ " <.job file>"
-							+ " <sample percent>");
+							+ " <sample percent between 0.0 and 1.0>");
 			System.exit(-1);
 		}
 		this.inputFile = new File(args[0]);
 		this.samplePercent = args[1];
+		try {
+			float test = Float.parseFloat(samplePercent);
+			if(test < 0.0 || test > 1.0) {
+				System.out.print("Sample percent "+samplePercent+"is invalid.\n"
+								 +"The value must be between 0.0 and 1.0");
+				System.exit(1);
+			}
+		} catch(Exception ex) {
+			System.out.print("Sample percent "+samplePercent+"is invalid.\n"
+					 +"The value must be between 0.0 and 1.0");
+			System.exit(1);
+		}
 	}
 	
 	private void sampling() throws IOException, InterruptedException
 	{
+		this.samplePercent = bactAlg.getProperties().getSamplePercent();
 		if(!this.samplePercent.equals("0.0"))
 		{
 			HadoopBash.execHadoop("fs -rmr "+bactAlg.getProperties().getPathOutputDirHDFS() + "/sample");
@@ -157,7 +170,7 @@ public class TuningByTesting {
 		String line;
 		String token;
 		String key = null;
-		KnobValue value = null;
+		Knob value = null;
 		do {
 			try {
 				line = buffReader.readLine();
@@ -172,16 +185,16 @@ public class TuningByTesting {
 				{
 					key = strTokens.nextToken(" ");
 
-					value = new IntValue();
+					value = new KnobInt();
 
 					token = strTokens.nextToken(" ");
-					((IntValue) value).setMin(Integer.parseInt(token));
+					((KnobInt) value).setMin(Integer.parseInt(token));
 
 					token = strTokens.nextToken(" ");
-					((IntValue) value).setMax(Integer.parseInt(token));
+					((KnobInt) value).setMax(Integer.parseInt(token));
 					
 					token = strTokens.nextToken(" = ");
-					((IntValue) value).setValue(Integer.parseInt(token));
+					((KnobInt) value).setValue(Integer.parseInt(token));
 					
 					indiv.addKnobs(key, value);
 				}
@@ -189,18 +202,26 @@ public class TuningByTesting {
 				{
 					key = strTokens.nextToken(" ");
 
-					value = new FloatValue();
+					value = new KnobFloat();
 
 					token = strTokens.nextToken(" ");
-					((FloatValue) value).setMin(Float.parseFloat(token));
+					((KnobFloat) value).setMin(Float.parseFloat(token));
 
 					token = strTokens.nextToken(" ");
-					((FloatValue) value).setMax(Float.parseFloat(token));
+					((KnobFloat) value).setMax(Float.parseFloat(token));
 					
 					token = strTokens.nextToken(" = ");
-					((FloatValue) value).setValue(Float.parseFloat(token));
+					((KnobFloat) value).setValue(Float.parseFloat(token));
 					
 					indiv.addKnobs(key, value);
+				}
+				if(token.contains("boolean"))
+				{
+					key = strTokens.nextToken(" ");
+					
+					value = new KnobBoolean();
+					
+					((KnobBoolean) value).setValue(Boolean.parseBoolean(token));
 				}
 			}
 		} while (!line.contains("}"));
@@ -228,17 +249,35 @@ public class TuningByTesting {
 			System.exit(1);
 		}
 
+		Knob value = null;
 		try {
 			buffWriter.write("Job " + jobName + " {\n");
 			buffWriter.write("\tKnobs {\n");
-			for (Map.Entry<String, KnobValue> entry : bestIndiv.getMapKnobs().entrySet())
-				buffWriter.write("\t\t"
-						+ entry.getValue().type() + " "
-						+ entry.getKey() + " "
-						+ entry.getValue().getMin() + " "
-						+ entry.getValue().getMax() + " = "
-						+ entry.getValue().getValue() + "\n");
-
+			for (Map.Entry<String, Knob> entry : bestIndiv.getMapKnobs().entrySet()) {
+				if(entry.getValue() instanceof KnobInt) {
+					value = (KnobInt) entry.getValue();
+					buffWriter.write("\t\t"
+							+ value.type() + " "
+							+ entry.getKey() + " "
+							+ ((KnobInt)value).getMin() + " "
+							+ ((KnobInt)value).getMax() + " = "
+							+ value.getValue() + "\n");
+				} else if(entry.getValue() instanceof KnobFloat) {
+					value = (KnobFloat) entry.getValue();
+					buffWriter.write("\t\t"
+							+ value.type() + " "
+							+ entry.getKey() + " "
+							+ ((KnobFloat)value).getMin() + " "
+							+ ((KnobFloat)value).getMax() + " = "
+							+ value.getValue() + "\n");
+				} else if(entry.getValue() instanceof KnobBoolean) {
+					value = (KnobBoolean) entry.getValue();
+					buffWriter.write("\t\t"
+							+ value.type() + " "
+							+ entry.getKey() + " = "
+							+ value.getValue() + "\n");
+				}
+			}
 			buffWriter.write("\t}\n");
 			buffWriter.write("\t{Execution time: "+bestIndiv.getExecutionTime()+"}\n");
 			buffWriter.write("}\n");

@@ -11,10 +11,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.joda.time.DateTime;
+import org.joda.time.Seconds;
+
 import ufpr.inf.kepe.util.AutoConfBash;
 import ufpr.inf.kepe.util.HadoopBash;
+import ufpr.inf.kepe.util.Knob;
 import ufpr.inf.kepe.util.Properties;
-import ufpr.inf.kepe.util.KnobValue;
 
 public class BacteriologicalAlgorithm {
 	private List<Individual> populationIndividuals;
@@ -24,6 +27,7 @@ public class BacteriologicalAlgorithm {
 	private double fitnessTarget = MIN_FITNESS;
 	private String jobName;
 	private File tmpFile;
+	private File resultFile;
 	private Properties properties;
 	private boolean alreadyAdded;
 
@@ -50,6 +54,7 @@ public class BacteriologicalAlgorithm {
 	public Individual startAlg() throws InterruptedException, IOException
 	{
 		createTmpDir();
+		createResultDir();
 		return runAlg();
 	}
 	
@@ -62,13 +67,24 @@ public class BacteriologicalAlgorithm {
 		}
 	}
 	
+	private void createResultDir() {
+		this.resultFile = new File("result/"+jobName);
+		if(!this.resultFile.exists())
+		{
+			this.resultFile.mkdirs();
+		}
+	}
+	
 	private Individual runAlg() throws InterruptedException, IOException
 	{
 		this.setMaxGeneration();
 		int numGenerations = 0;
+		DateTime startDateTime, endDateTime;
+		Seconds roundSeconds;
 		do {
 			System.out.println("New generation "+numGenerations);
 			System.out.println("Calculing fitness...");
+			startDateTime = new DateTime();
 			for (Individual indiv : populationIndividuals)
 				calcFitiness(indiv);
 
@@ -78,8 +94,11 @@ public class BacteriologicalAlgorithm {
 			reproduction();
 			System.out.println("Reproduced the best individual.");
 			mutation();
+			endDateTime = new DateTime();
 			System.out.println("Mutated individuals.");
 			numGenerations++;
+			roundSeconds = Seconds.secondsBetween(startDateTime, endDateTime);
+			System.out.println("Round time: "+roundSeconds.getSeconds()+"s.");
 			System.out.println("--------------------------------------------------");
 		} while ((numGenerations < maxGeneration)
 				&& (bestIndividual.getExecutionTime() > fitnessTarget));
@@ -114,7 +133,7 @@ public class BacteriologicalAlgorithm {
 			throw new IOException("Error to open conf file: "+ confFile.getAbsolutePath());
 		}
 
-		for (Map.Entry<String, KnobValue> entry : indiv.getMapKnobs().entrySet())
+		for (Map.Entry<String, Knob> entry : indiv.getMapKnobs().entrySet())
 			try {
 				buffWriter.write(entry.getKey() + " = "	
 								+ entry.getValue().getValue()+"\n");
@@ -151,11 +170,18 @@ public class BacteriologicalAlgorithm {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyy-mm-dd_hh_mm_ss");
 		String strDate = dateFormat.format(new Date());
 		//TODO tem que apagar o diretório de saída ou criar um novo diretório
-		String opts = "jar " + properties.getJarPath() + " " 
-							 + properties.getJobClassName() + " " 
-							 /*+ properties.getPathInputDirHDFS() + " "*/
-							 + properties.getPathOutputDirHDFS() + "/sample "
-							 + properties.getPathOutputDirHDFS() + "/" + strDate;
+		String opts;
+		if(this.getProperties().getSamplePercent() == "0.0") {
+			opts = "jar " + properties.getJarPath() + " " 
+					 + properties.getJobClassName() + " " 
+					 + properties.getPathInputDirHDFS() + " "
+					 + properties.getPathOutputDirHDFS() + "/" + strDate;			
+		} else {
+			opts = "jar " + properties.getJarPath() + " " 
+					 + properties.getJobClassName() + " " 
+					 + properties.getPathOutputDirHDFS() + "/sample "
+					 + properties.getPathOutputDirHDFS() + "/" + strDate;
+		}
 		HadoopBash.execHadoop(opts);
 	}
 
@@ -192,7 +218,7 @@ public class BacteriologicalAlgorithm {
 	
 	private void writeIndividualToFile(Individual indiv, int numGen)
 	{
-		TuningByTesting.writeResult(indiv, "result/"+jobName+"/generation"+numGen);
+		TuningByTesting.writeResult(indiv, resultFile.getAbsolutePath()+"/generation"+numGen);
 	}
 	
 	public void readProperties(BufferedReader buffReader) throws IOException

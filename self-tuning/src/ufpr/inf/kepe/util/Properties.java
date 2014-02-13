@@ -11,6 +11,7 @@ public class Properties
 	private String pathInputDirHDFS;
 	private String pathOutputDirHDFS;
 	private int numGenerations;
+	private String samplePercent;
 	
 	public String getJarPath() {
 		return jarPath;
@@ -42,6 +43,12 @@ public class Properties
 	}
 	public void setNumGenerations(int numGenerations) {
 		this.numGenerations = numGenerations;
+	}
+	public String getSamplePercent() {
+		return samplePercent;
+	}
+	public void setSamplePercent(String samplePercent) {
+		this.samplePercent = samplePercent;
 	}
 	public void readProperties(BufferedReader buffReader) throws IOException {
 		String line;
@@ -81,6 +88,11 @@ public class Properties
 				{
 					value = strTokens.nextToken(" ");
 					this.numGenerations = Integer.parseInt(value);
+				}
+				else if (property.contains("samplePercent"))
+				{
+					value = strTokens.nextToken(" ");
+					this.samplePercent = value;
 				}
 			}
 		} while (!line.contains("}"));
