@@ -3,20 +3,24 @@ package ufpr.inf.kepe;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
-import ufpr.inf.kepe.util.FloatValue;
-import ufpr.inf.kepe.util.IntValue;
+import ufpr.inf.kepe.util.Knob;
+import ufpr.inf.kepe.util.KnobBoolean;
+import ufpr.inf.kepe.util.KnobFloat;
+import ufpr.inf.kepe.util.KnobInt;
 import ufpr.inf.kepe.util.KnobValue;
 
 public class Individual {
-	private Map<String, KnobValue> mapKnobs;
+	private SortedMap<String, Knob> mapKnobs;
 	private double executionTime;
 
 	public Individual() {
-		this.mapKnobs = new HashMap<String, KnobValue>();
+		this.mapKnobs = new TreeMap<String, Knob>();
 	}
 
-	public Individual(Map<String, KnobValue> mapKnobs) {
+	public Individual(SortedMap<String, Knob> mapKnobs) {
 		this.mapKnobs = mapKnobs;
 	}
 
@@ -25,75 +29,81 @@ public class Individual {
 		Random rand = new Random();
 		int posKey = rand.nextInt(keySet.length);
 		String keyMutate = keySet[posKey];
-		KnobValue value = mapKnobs.get(keyMutate);
+		Knob value = mapKnobs.get(keyMutate);
 
-		if (value instanceof IntValue)
+		if (value instanceof KnobInt)
 		{
 			rand = new Random();
-			int major = ((IntValue) value).getMax();
-			int valueMutate = rand.nextInt(major);
-			((IntValue) value).setValue(valueMutate);
+			int major = ((KnobInt) value).getMax();
+			int valueMutate;
+			do {
+				valueMutate = rand.nextInt(major);
+			} while(valueMutate < ((KnobInt) value).getMin());
+			
+			((KnobInt) value).setValue(valueMutate);
 			mapKnobs.put(keyMutate, value);
 		}
-		else if (value instanceof FloatValue)
+		else if (value instanceof KnobFloat)
 		{
 			rand = new Random();
 			Float valueMutate = rand.nextFloat();
-			((FloatValue) value).setValue(valueMutate);
+			((KnobFloat) value).setValue(valueMutate);
 			mapKnobs.put(keyMutate, value);
 		}
-/*		else if (value instanceof Boolean) {
+		else if (value instanceof KnobBoolean) {
 			rand = new Random();
 			Boolean valueMutate = rand.nextBoolean();
-			mapKnobs.put(keyMutate, valueMutate);
-		}*/
+			((KnobBoolean) value).setValue(valueMutate);
+			mapKnobs.put(keyMutate, value);
+		}
 	}
 
 	public Individual clone() {
 		Individual indivCloned = new Individual();
-		Map<String, KnobValue> copyKnobs = new HashMap<String, KnobValue>();
+		SortedMap<String, Knob> copyKnobs = new TreeMap<String, Knob>();
 		String key;
 		Object oldValue;
-		for (Map.Entry<String, KnobValue> entry : this.mapKnobs.entrySet()) {
+		for (Map.Entry<String, Knob> entry : this.mapKnobs.entrySet()) {
 			key = entry.getKey();
 			oldValue = entry.getValue();
-			if (oldValue instanceof IntValue)
+			if (oldValue instanceof KnobInt)
 			{
-				IntValue value = new IntValue();
-				value.setValue(((IntValue) oldValue).getValue());
-				value.setMax(((IntValue) oldValue).getMax());
-				value.setMin(((IntValue) oldValue).getMin());
+				KnobInt value = new KnobInt();
+				value.setValue(((KnobInt) oldValue).getValue());
+				value.setMax(((KnobInt) oldValue).getMax());
+				value.setMin(((KnobInt) oldValue).getMin());
 
 				copyKnobs.put(key, value);
 			}
-			else if (oldValue instanceof FloatValue)
+			else if (oldValue instanceof KnobFloat)
 			{
-				FloatValue value = new FloatValue();
-				value.setValue(((FloatValue) oldValue).getValue());
-				value.setMax(((FloatValue) oldValue).getMax());
-				value.setMin(((FloatValue) oldValue).getMin());
+				KnobFloat value = new KnobFloat();
+				value.setValue(((KnobFloat) oldValue).getValue());
+				value.setMax(((KnobFloat) oldValue).getMax());
+				value.setMin(((KnobFloat) oldValue).getMin());
 				
 				copyKnobs.put(key, value);
 			}
-/*			else {
-				Boolean value = new Boolean((Boolean) oldValue);
+			else {
+				KnobBoolean value = new KnobBoolean();
+				value.setValue(((KnobBoolean) oldValue).getValue());
 				copyKnobs.put(key, value);
-			}*/
+			}
 		}
 
 		indivCloned.setMapKnobs(copyKnobs);
 		return indivCloned;
 	}
 
-	public Map<String, KnobValue> getMapKnobs() {
+	public SortedMap<String, Knob> getMapKnobs() {
 		return mapKnobs;
 	}
 
-	public void setMapKnobs(Map<String, KnobValue> mapKnobs) {
+	public void setMapKnobs(SortedMap<String, Knob> mapKnobs) {
 		this.mapKnobs = mapKnobs;
 	}
 
-	public void addKnobs(String key, KnobValue value) {
+	public void addKnobs(String key, Knob value) {
 		this.mapKnobs.put(key, value);
 	}
 

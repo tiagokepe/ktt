@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
+import ufpr.inf.kepe.AlgorithmType;
+
 public class Properties
 {
 	private String jarPath;
@@ -12,6 +14,8 @@ public class Properties
 	private String pathOutputDirHDFS;
 	private int numGenerations;
 	private String samplePercent;
+	private AlgorithmType algorithm;
+	private int populationSize;
 	
 	public String getJarPath() {
 		return jarPath;
@@ -49,6 +53,15 @@ public class Properties
 	}
 	public void setSamplePercent(String samplePercent) {
 		this.samplePercent = samplePercent;
+	}
+	public int getPopulationSize() {
+		return populationSize;
+	}
+	public void setPopulationSize(int populationSize) {
+		this.populationSize = populationSize;
+	}
+	public AlgorithmType getAlgorithm() {
+		return algorithm;
 	}
 	public void readProperties(BufferedReader buffReader) throws IOException {
 		String line;
@@ -93,6 +106,32 @@ public class Properties
 				{
 					value = strTokens.nextToken(" ");
 					this.samplePercent = value;
+					try {
+						float test = Float.parseFloat(samplePercent);
+						if(test < 0.0 || test > 1.0) {
+							System.out.print("Sample percent "+samplePercent+"is invalid.\n"
+											 +"The value must be between 0.0 and 1.0");
+							System.exit(1);
+						}
+					} catch(Exception ex) {
+						System.out.print("Sample percent "+samplePercent+"is invalid.\n"
+								 +"The value must be between 0.0 and 1.0");
+						System.exit(1);
+					}
+				}
+				else if(property.contains("algorithm"))
+				{
+					value = strTokens.nextToken(" ");
+					if(value.equals(AlgorithmType.Genetic.getAlgName()))
+						this.algorithm = AlgorithmType.Genetic;
+					else
+						this.algorithm = AlgorithmType.Bacteriological;
+					
+				}
+				else if(property.contains("populationSize"))
+				{
+					value = strTokens.nextToken(" ");
+					this.populationSize = Integer.parseInt(value);
 				}
 			}
 		} while (!line.contains("}"));

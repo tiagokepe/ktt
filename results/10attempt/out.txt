@@ -1,0 +1,163 @@
+Updating knobs!
+Generating sample...
+Updating knobs!
+Sample generated!
+--------------------------------------------------
+New generation 0
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1320s.
+--------------------------------------------------
+New generation 1
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1803s.
+--------------------------------------------------
+New generation 2
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1771s.
+--------------------------------------------------
+New generation 3
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1745s.
+--------------------------------------------------
+New generation 4
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1714s.
+--------------------------------------------------
+New generation 5
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1728s.
+--------------------------------------------------
+New generation 6
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1797s.
+--------------------------------------------------
+New generation 7
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1793s.
+--------------------------------------------------
+New generation 8
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1744s.
+--------------------------------------------------
+New generation 9
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1711s.
+--------------------------------------------------

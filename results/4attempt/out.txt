@@ -1,0 +1,101 @@
+Updating knobs!
+Generating sample...
+Updating knobs!
+Sample generated!
+--------------------------------------------------
+New generation 0
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1790s.
+--------------------------------------------------
+New generation 1
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1782s.
+--------------------------------------------------
+New generation 2
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1852s.
+--------------------------------------------------
+New generation 3
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1788s.
+--------------------------------------------------
+New generation 4
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1844s.
+--------------------------------------------------
+New generation 5
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1775s.
+--------------------------------------------------

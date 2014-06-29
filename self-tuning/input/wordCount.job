@@ -1,10 +1,11 @@
-Job WordCount {
+Job wordcount {
     Properties {
-        jarPath /home/kepe/UFPR/mestrado/TrabPrat/tuning-by-testing-1.0.1/jar/2wordcount.jar
+        jarPath /home/tkepe/mestrado/master/ktt/self-tuning/jar/wordcount.jar
         jobClassName org.apache.hadoop.examples.WordCount
-        pathInputDirHDFS /kepe/wc/in
+        pathInputDirHDFS /kepe/in
         pathOutputDirHDFS /kepe/wc/out
         numGenerations 6
+        samplePercent 0.0
     }   
     Knobs {
 	    int mapred.reduce.tasks 1 30 = 1
@@ -12,11 +13,11 @@ Job WordCount {
         int io.sort.mb 1 100 = 25
         int io.sort.factor 1 100 = 25
         int mapred.inmem.merge.threshold 0 1000 = 25
-        float io.sort.spill.percent 0 1 = 0.25
-        float io.sort.record.percent 0 1 = 0.25
-    	float mapred.job.shuffle.merge.perent 0 1 = 0.25
-	    float mapred.job.shuffle.input.buffer.percent 0 1 = 0.25
-        float mapred.job.reduce.input.buffer.percent 0 1 = 0.25
+        float io.sort.spill.percent 0 1 = 0.80
+        float io.sort.record.percent 0 1 = 0.80
+    	float mapred.job.shuffle.merge.percent 0 1 = 0.80
+	    float mapred.job.shuffle.input.buffer.percent 0 1 = 0.80
+        float mapred.job.reduce.input.buffer.percent 0 1 = 0.80
     }
     Knobs {
     	int mapred.reduce.tasks 1 30 = 5
@@ -26,7 +27,7 @@ Job WordCount {
         int mapred.inmem.merge.threshold 0 1000 = 50
         float io.sort.spill.percent 0 1 = 0.5
         float io.sort.record.percent 0 1 = 0.5
-	    float mapred.job.shuffle.merge.perent 0 1 = 0.5
+	    float mapred.job.shuffle.merge.percent 0 1 = 0.5
     	float mapred.job.shuffle.input.buffer.percent 0 1 = 0.5
         float mapred.job.reduce.input.buffer.percent 0 1 = 0.5
     }
@@ -38,7 +39,7 @@ Job WordCount {
         int mapred.inmem.merge.threshold 0 1000 = 75
         float io.sort.spill.percent 0 1 = 0.5
         float io.sort.record.percent 0 1 = 0.5
-    	float mapred.job.shuffle.merge.perent 0 1 = 0.75
+    	float mapred.job.shuffle.merge.percent 0 1 = 0.75
 	    float mapred.job.shuffle.input.buffer.percent 0 1 = 0.75
         float mapred.job.reduce.input.buffer.percent 0 1 = 0.75
     }

@@ -1,0 +1,11 @@
+Generation  |   TIME
+0   |   31mins, 3sec
+1   |   29mins, 47sec   <----- FALHOU
+2   |   35mins, 19sec
+3   |   31mins, 36sec
+4   |   30mins, 28sec
+5   |   30mins, 24sec
+6   |   30mins, 11sec
+7   |   30mins, 33sec
+8   |   30mins, 35sec
+9   |   29mins, 52sec

@@ -1,0 +1,99 @@
+Updating knobs!
+Generating sample...
+Updating knobs!
+Sample generated!
+--------------------------------------------------
+New generation 0
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1341s.
+--------------------------------------------------
+New generation 1
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1785s.
+--------------------------------------------------
+New generation 2
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1778s.
+--------------------------------------------------
+New generation 3
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1768s.
+--------------------------------------------------
+New generation 4
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 1776s.
+--------------------------------------------------
+New generation 5
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 2453s.
+--------------------------------------------------

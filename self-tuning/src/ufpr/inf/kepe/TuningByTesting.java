@@ -17,17 +17,18 @@ import ufpr.inf.kepe.util.Knob;
 import ufpr.inf.kepe.util.KnobBoolean;
 import ufpr.inf.kepe.util.KnobFloat;
 import ufpr.inf.kepe.util.KnobInt;
+import ufpr.inf.kepe.util.Properties;
 
 public class TuningByTesting {
 
-	private BacteriologicalAlgorithm bactAlg;
+	private AbstractAlg algorithm;
 	private static String jobName;
 	private AutoConfBash autoConfBash;
 	private File inputFile;
-	private String samplePercent;
+	//private String samplePercent;
+	private Properties properties = new Properties();
 	
 	public TuningByTesting() {
-		bactAlg = new BacteriologicalAlgorithm();
 	}
 
 	/**
@@ -38,6 +39,7 @@ public class TuningByTesting {
 		tunTest.readArgs(args);
 		try {
 			tunTest.startAutoConf();
+			tunTest.readPropertiesAndJobName();
 			tunTest.cretateInitialPopulation();
 			tunTest.sampling();
 			Individual result = tunTest.start();
@@ -56,49 +58,30 @@ public class TuningByTesting {
 		}
 	}
 	
-	public String getSamplePercent() {
-		return samplePercent;
-	}
-
 	private void readArgs(String[] args)
 	{
-		if(args.length !=2)
+		if(args.length !=1)
 		{
 			System.out.println("Usage:");
-			System.out.println("TuningByTest <file with the initial population>"
-							+ " <.job file>"
-							+ " <sample percent between 0.0 and 1.0>");
+			System.out.println("TuningByTest <.job file>");
 			System.exit(-1);
 		}
 		this.inputFile = new File(args[0]);
-		this.samplePercent = args[1];
-		try {
-			float test = Float.parseFloat(samplePercent);
-			if(test < 0.0 || test > 1.0) {
-				System.out.print("Sample percent "+samplePercent+"is invalid.\n"
-								 +"The value must be between 0.0 and 1.0");
-				System.exit(1);
-			}
-		} catch(Exception ex) {
-			System.out.print("Sample percent "+samplePercent+"is invalid.\n"
-					 +"The value must be between 0.0 and 1.0");
-			System.exit(1);
-		}
 	}
 	
 	private void sampling() throws IOException, InterruptedException
 	{
-		this.samplePercent = bactAlg.getProperties().getSamplePercent();
-		if(!this.samplePercent.equals("0.0"))
+		//this.samplePercent = algorithm.getProperties().getSamplePercent();
+		if(!algorithm.getProperties().getSamplePercent().equals("0.0"))
 		{
-			HadoopBash.execHadoop("fs -rmr "+bactAlg.getProperties().getPathOutputDirHDFS() + "/sample");
+			HadoopBash.execHadoop("fs -rmr "+algorithm.getProperties().getPathOutputDirHDFS() + "/sample");
 		
 			System.out.println("Generating sample...");
 			String sampleJarPath = System.getenv("KEPE_SAMPLE_HOME")+"/jar/sample-random.jar";
 			String opts = "jar " + sampleJarPath + " " 
-								 + this.samplePercent + " " 
-								 + bactAlg.getProperties().getPathInputDirHDFS() + " "
-								 + bactAlg.getProperties().getPathOutputDirHDFS() + "/sample";
+								 + algorithm.getProperties().getSamplePercent() + " " 
+								 + algorithm.getProperties().getPathInputDirHDFS() + " "
+								 + algorithm.getProperties().getPathOutputDirHDFS() + "/sample";
 			
 			HadoopBash.execHadoop(opts);
 			System.out.println("Sample generated!");
@@ -115,9 +98,8 @@ public class TuningByTesting {
 	{
 		autoConfBash.stopAutoConfServer();
 	}
-
-
-	private void cretateInitialPopulation() {
+	
+	private void readPropertiesAndJobName() {
 		BufferedReader buffReader = null;
 
 		try {
@@ -137,13 +119,10 @@ public class TuningByTesting {
 				}
 				else if(line.contains("Properties"))
 				{
-					this.bactAlg.readProperties(buffReader);
+					this.properties.readProperties(buffReader);
+					this.setAlgorithm();
+					this.setAlgProperties();
 				}
-				else if (line.contains("Knobs"))
-				{
-					this.bactAlg.addIndivToPoputlation(readKnobs(buffReader));
-				}	
-				
 			}
 		} catch (IOException ex) {
 			System.out.println("Error to read the file: "
@@ -160,9 +139,55 @@ public class TuningByTesting {
 		}
 	}
 
+
+	private void setAlgorithm() {
+		if(this.properties.getAlgorithm().equals(AlgorithmType.Bacteriological.getAlgName()))
+			this.algorithm = new BacteriologicalAlg();
+		else
+			this.algorithm = new GeneticAlg();
+	}
+
+	private void cretateInitialPopulation() {
+		BufferedReader buffReader = null;
+
+		try {
+			buffReader = new BufferedReader(new FileReader(this.inputFile));
+		} catch (FileNotFoundException ex) {
+			System.out.println("File not found: " + this.inputFile.getAbsolutePath());
+			System.exit(1);
+		}
+
+		String line;
+		try {
+			while (buffReader.ready()) {
+				line = buffReader.readLine();
+				if (line.contains("Knobs"))
+				{
+					this.algorithm.addIndivToPoputlation(readKnobs(buffReader));
+				}	
+			}
+		} catch (IOException ex) {
+			System.out.println("Error to read the file: "
+					+ this.inputFile.getAbsolutePath());
+			System.exit(2);
+		}
+
+		try {
+			buffReader.close();
+		} catch (IOException e) {
+			System.out.println("Error to close the file: "
+					+ this.inputFile.getAbsolutePath());
+			System.exit(2);
+		}
+	}
+
+	private void setAlgProperties() {
+		this.algorithm.setProperties(this.properties);
+	}
+	
 	private Individual start() throws InterruptedException, IOException {
-		bactAlg.setJobName(jobName);
-		return bactAlg.startAlg();
+		algorithm.setJobName(jobName);
+		return algorithm.startAlg();
 	}
 
 	private Individual readKnobs(BufferedReader buffReader) throws IOException {

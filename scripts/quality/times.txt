@@ -1,0 +1,19 @@
+gen0	32m36sec
+
+gen1	33m2sec
+
+gen2	31m2sec
+
+gen3	31m3sec
+
+gen4	31m8sec
+
+gen5	31m21sec
+
+gen6	30m41sec
+
+gen7	30m48sec
+
+gen8	30m58sec
+
+gen9	30m33sec

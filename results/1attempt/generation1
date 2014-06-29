@@ -1,0 +1,15 @@
+Job wordcount {
+	Knobs {
+		int io.sort.factor = 75
+		int io.sort.mb = 75
+		float io.sort.record.percent = 0.5
+		float io.sort.spill.percent = 0.5
+		int mapred.inmem.merge.threshold = 458
+		float mapred.job.reduce.input.buffer.percent = 0.75
+		float mapred.job.shuffle.input.buffer.percent = 0.75
+		float mapred.job.shuffle.merge.perent = 0.25
+		int mapred.map.tasks = 1
+		int mapred.reduce.tasks = 10
+	}
+	{Execution time: 227.475}
+}

@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import ufpr.inf.kepe.BacteriologicalAlgorithm;
+import ufpr.inf.kepe.BacteriologicalAlg;
 
 public class ExecBash {
 
