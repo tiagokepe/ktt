@@ -1,0 +1,94 @@
+Updating knobs!
+New generation 0
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 6100s.
+--------------------------------------------------
+New generation 1
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 8319s.
+--------------------------------------------------
+New generation 2
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 8430s.
+--------------------------------------------------
+New generation 3
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 8256s.
+--------------------------------------------------
+New generation 4
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 8485s.
+--------------------------------------------------
+New generation 5
+Calculing fitness...
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Updating knobs!
+Selected the best individual.
+Created new population.
+Crossover individuals.
+Mutated individuals.
+Round time: 8422s.
+--------------------------------------------------

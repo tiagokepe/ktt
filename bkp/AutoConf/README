@@ -1,0 +1,6 @@
+autoconf-server
+depois autoconfctl -j <nome-do-job> -f conf/configuration.conf -a
+só isso
+autoconf-server
+depois inicia o hadoop
+hadoop jar hadoop-examples-1.0.4.jar pi 1 1

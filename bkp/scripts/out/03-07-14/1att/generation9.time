@@ -1,0 +1,10 @@
+KEPE_AUTOCONF_HOME = /home/tkepe/mestrado/ktt/AutoConf
+----- Antes mapred.map.tasks = 2
+AutoConf: Connecting to AutoConf server at localhost:50123
+AutoConf: There are 255 knobs available.
+AutoConf: Applying 9 tuned knobs from 255 knobs.
+-----mapred.map.tasks = 2
+----------------------------------------
+getNumMapTasks = 2
+XML path = hdfs://tkepe:54310/home/tkepe/mestrado/hdfs_dirs/tmp/mapred/staging/tkepe/.staging/job_201406252225_0055/job.xml
+jobSubmitClient.getClass().getCanonicalName() = org.apache.hadoop.mapred.$Proxy2

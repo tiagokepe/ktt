@@ -1,0 +1,67 @@
+	
+	
+	
+	
+	
+	
+	
+	
+		      description="common artifacts"/>	
+       http://www.apache.org/licenses/LICENSE-2.0	
+      conf="client->default"/>	
+      conf="client->default"/>	
+      conf="common->default"/>	
+      conf="common->default"/>	
+      conf="common->default">	
+      conf="common->master"/>	
+      conf="jetty->master"/>	
+      conf="jetty->master"/>	
+      conf="log4j->master"/>	
+      conf="s3-client->master"/> 	
+      extends="client"/>	
+      name="checkstyle"	
+      name="commons-codec"	
+      name="commons-lang"	
+      name="commons-logging"	
+      name="commons-net"	
+      name="commons-net"	
+      name="core"	
+      name="jasper-compiler"	
+      name="jersey-server"	
+      name="jetty-util"	
+      name="junit"	
+      name="log4j"	
+      rev="${aspectj.version}"	
+      rev="${commons-daemon.version}"	
+      rev="${commons-io.version}"	
+      rev="${commons-net.version}"	
+      rev="${jasper.version}"	
+      rev="${junit.version}"	
+      rev="${rats-lib.version}"	
+      rev="${slf4j-api.version}"	
+    -->	
+    <!--Configuration: commons-logging -->	
+    <!--Configuration: httpclient-->	
+    <!--Configuration: kfs -->	
+    <!--there are two jets3t projects in the repository; this one goes up to 0.6 and	
+    <!--these match the Maven configurations-->	
+    </dependency>	
+    </dependency>	
+    </dependency>	
+    <conf name="common" visibility="private" extends="runtime,mandatory,httpclient,ftp,jetty"	
+    <conf name="kfs" description="dependencies for KFS file system support"/>	
+    <dependency org="asm"	
+    <dependency org="commons-el"	
+    <dependency org="commons-lang"	
+    <dependency org="lucene"	
+    <dependency org="org.aspectj"	
+    <dependency org="org.codehaus.jackson"	
+    <dependency org="org.eclipse.jdt"	
+    <dependency org="oro"	
+    like out of date servlet APIs, bits of Avalon, etc.	
+    rev="${kfs.version}"	
+   Unless required by applicable law or agreed to in writing, software	
+   distributed under the License is distributed on an "AS IS" BASIS,	
+  </configurations>	
+  <info organisation="org.apache.hadoop" module="${ant.project.name}">	
+</ivy-module>	

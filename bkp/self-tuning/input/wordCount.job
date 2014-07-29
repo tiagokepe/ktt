@@ -1,0 +1,46 @@
+Job wordcount {
+    Properties {
+        jarPath /home/tkepe/mestrado/master/ktt/self-tuning/jar/wordcount.jar
+        jobClassName org.apache.hadoop.examples.WordCount
+        pathInputDirHDFS /kepe/in
+        pathOutputDirHDFS /kepe/wc/out
+        numGenerations 6
+        samplePercent 0.0
+    }   
+    Knobs {
+	    int mapred.reduce.tasks 1 30 = 1
+        int mapred.map.tasks 1 30 = 1
+        int io.sort.mb 1 100 = 25
+        int io.sort.factor 1 100 = 25
+        int mapred.inmem.merge.threshold 0 1000 = 25
+        float io.sort.spill.percent 0 1 = 0.80
+        float io.sort.record.percent 0 1 = 0.80
+    	float mapred.job.shuffle.merge.percent 0 1 = 0.80
+	    float mapred.job.shuffle.input.buffer.percent 0 1 = 0.80
+        float mapred.job.reduce.input.buffer.percent 0 1 = 0.80
+    }
+    Knobs {
+    	int mapred.reduce.tasks 1 30 = 5
+        int mapred.map.tasks 1 30 = 5
+        int io.sort.mb 1 100 = 50
+        int io.sort.factor 1 100 = 50
+        int mapred.inmem.merge.threshold 0 1000 = 50
+        float io.sort.spill.percent 0 1 = 0.5
+        float io.sort.record.percent 0 1 = 0.5
+	    float mapred.job.shuffle.merge.percent 0 1 = 0.5
+    	float mapred.job.shuffle.input.buffer.percent 0 1 = 0.5
+        float mapred.job.reduce.input.buffer.percent 0 1 = 0.5
+    }
+    Knobs {
+	    int mapred.reduce.tasks 1 30 = 15
+        int mapred.map.tasks 1 30 = 15
+        int io.sort.mb 1 100 = 75
+        int io.sort.factor 1 100 = 75
+        int mapred.inmem.merge.threshold 0 1000 = 75
+        float io.sort.spill.percent 0 1 = 0.5
+        float io.sort.record.percent 0 1 = 0.5
+    	float mapred.job.shuffle.merge.percent 0 1 = 0.75
+	    float mapred.job.shuffle.input.buffer.percent 0 1 = 0.75
+        float mapred.job.reduce.input.buffer.percent 0 1 = 0.75
+    }
+}

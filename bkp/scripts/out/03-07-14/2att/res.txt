@@ -1,0 +1,10 @@
+0	30mins, 41se
+1	31mins, 37sec
+2	31mins, 31sec
+3   31mins, 40sec
+4   1hrs, 1mins, 28sec fail
+5   30mins, 35sec
+6   30mins, 50sec
+7   31mins, 0sec
+8   31mins, 7sec
+9   31mins, 3sec

@@ -1,0 +1,26 @@
+Job PiEstimator {
+    Properties {
+        jarPath /home/kepe/dados/mestrado/hadoop-1.0.4/hadoop-examples-1.0.4.jar
+        jobClassName pi
+        pathInputDirHDFS /kepe/pi/input
+        pathOutputDirHDFS /kepe/wc/out
+    }   
+	Knobs {
+		int mapred.job.maps 1 30
+		int mapred.job.reduces 1 30
+		int mapred.reduce.tasks 1 30
+        int mapred.map.tasks 1 30
+	}
+	Knobs {
+		int mapred.job.maps 5 30
+		int mapred.job.reduces 5 30
+		int mapred.reduce.tasks 5 30
+        int mapred.map.tasks 5 30
+	}
+	Knobs {
+		int mapred.job.maps 15 30
+		int mapred.job.reduces 15 30
+		int mapred.reduce.tasks 15 30
+        int mapred.map.tasks 15 30
+	}
+}
