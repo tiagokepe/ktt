@@ -8,3 +8,8 @@ The engine generates samples based on the data set stored on the cluster for eac
 Afterward, it runs the job on these samples using the bacteriological algorithm to find better configuration knobs.
 
 The AutoConf (RMI methods) module intercepts the Hadoop execution and sets up the new knobs.
+
+Papers
+==
+
+This project contributed to the following paper:  https://www.inf.ufpr.br/eduardo/papers/SBBD15_Tiago.pdf
